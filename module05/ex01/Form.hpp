@@ -2,6 +2,8 @@
 #include <iostream>
 #include <stdexcept>
 
+class Bureaucrat;
+
 class Form {
     public:
     Form();
@@ -10,17 +12,20 @@ class Form {
     Form &operator=(const Form &rhs);
     ~Form();
 
+	bool				onIsSigned() const ;
+	void				beSigned(Bureaucrat &);
+
     const std::string   getName() const ;
     int                 getGradeSign() const ;
     int                 getGradeExe() const ;
 
-    class GradeTooHighExeption : public std::range_error {
+    class GradeTooHighException : public std::range_error {
         public:
-        GradeTooHighExeption(const std::string&);
+        GradeTooHighException(const std::string&);
     };
-    class GradeTooLowExeption : public std::range_error {
+    class GradeTooLowException : public std::range_error {
         public:
-        GradeTooLowExeption(const std::string&);
+        GradeTooLowException(const std::string&);
     };
 
     private:
@@ -29,3 +34,6 @@ class Form {
     const int           _gradeSign;
     const int           _gradeExe;
 };
+
+std::ostream& operator<<(std::ostream& out, const Form& bureaucrat);
+

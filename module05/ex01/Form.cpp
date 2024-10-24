@@ -1,28 +1,27 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <stdexcept>
 
-Form::Form() : _name("UnkownForm"), _signed(false), _gradeExe(150), _gradeSign(150)
+Form::Form() : _name("UnkownForm"), _signed(false), _gradeSign(150), _gradeExe(150)
 {
     
 }
 
-
-
 Form::Form(const std::string &name, int gradeSign, int gradeExe)
-: _name(name), _gradeSign(gradeSign), _gradeExe(gradeExe)
+: _name(name), _signed(false), _gradeSign(gradeSign), _gradeExe(gradeExe)
 {
     try
     {
         if (name.empty()) {
             throw std::invalid_argument("Name cannot be empty");
         } else if (gradeSign < 1 || gradeExe < 1) {
-            throw GradeTooHighException("Grade too High.");
+			throw GradeTooHighException("Grade too high.");
         } else if (gradeExe > 150 || gradeSign > 150) {
-            throw GradeTooLowException("Grade too Low.");
+          	throw GradeTooLowException("Grade too low.");
         }
     }
-    catch(GradeTooHighExeption &e)
+    catch(GradeTooHighException &e)
     {
         std::cerr << e.what() << '\n';
     }
@@ -33,8 +32,9 @@ Form::~Form(){}
 
 Form::Form(const Form &copy) : 
     _name(copy._name),
-    _gradeExe(copy._gradeExe), 
-    _gradeSign(copy._gradeSign) 
+	_signed(copy._signed),
+    _gradeSign(copy._gradeSign),
+    _gradeExe(copy._gradeExe) 
 {
 
 }
@@ -46,11 +46,11 @@ Form &Form::operator=(const Form &rhs) {
     return *this;
 }
 
-Form::GradeTooHighExeption::GradeTooHighExeption(const std::string &msg) : std::range_error(msg) {
+Form::GradeTooHighException::GradeTooHighException(const std::string &msg) : std::range_error(msg) {
 
 }
 
-Form::GradeTooLowExeption::GradeTooLowExeption(const std::string &msg) : std::range_error(msg) {
+Form::GradeTooLowException::GradeTooLowException(const std::string &msg) : std::range_error(msg) {
 
 }
 
@@ -64,5 +64,23 @@ int   Form::getGradeExe() const {
 
 int   Form::getGradeSign() const {
     return _gradeSign;
+}
+
+bool	Form::onIsSigned() const {
+	return (this->_signed);
+}
+
+void	Form::beSigned(Bureaucrat &bureaucrat) {
+	if (bureaucrat.getGrade() <= this->_gradeSign) {
+		this->_signed = true;
+	} else {
+		throw GradeTooLowException("Grade too low to sign form.");
+	}
+}
+
+std::ostream &operator<<(std::ostream &out, const Form &form) {
+	out << "Form Info:\nForm name: "<< form.getName() << "\nForm sign grade: " << form.getGradeSign()
+	<< "\nForm exec grade: " << form.getGradeExe() << std::endl;
+	return out;
 }
 

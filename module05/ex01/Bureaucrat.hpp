@@ -2,6 +2,8 @@
 #include <iostream>
 #include <stdexcept>
 
+class Form;
+
 class Bureaucrat {
 	public:
 	Bureaucrat();
@@ -9,6 +11,8 @@ class Bureaucrat {
 	Bureaucrat(const Bureaucrat &copy);
 	Bureaucrat &operator=(const Bureaucrat &rhs);
 	~Bureaucrat();
+
+	void				signForm(Form &);
 
 	const std::string&	getName() const { return _name; }
 	int					getGrade() const { return _grade; }
