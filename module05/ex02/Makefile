@@ -1,6 +1,9 @@
-CXX = g++
+CXX = c++
 CXXFLAGS = -Wall -Wextra -std=c++98
-SRCS = main.cpp file1.cpp file2.cpp
+SRCS = main.cpp AForm.cpp Bureaucreat.cpp \
+			ShrubberyCreationForm.cpp \
+			RobotomyRequestForm.cpp \
+			PresidentialPardonForm.cpp 
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
 TARGET = scalar
