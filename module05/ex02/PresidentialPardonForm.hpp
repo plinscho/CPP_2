@@ -8,8 +8,6 @@ class PresidentialPardonForm : public AForm {
 
 	public:
 	PresidentialPardonForm(const std::string &target);
-	PresidentialPardonForm(const PresidentialPardonForm &copy);
-	PresidentialPardonForm &operator=(const PresidentialPardonForm &rhs);
 	~PresidentialPardonForm();
 
 	bool	execute(const Bureaucrat &executor) const ;

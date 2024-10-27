@@ -22,11 +22,7 @@ int main(void) {
 	std::cout << "GradeToSign: " << scf.getGradeSign() << std::endl;
 	std::cout << std::endl;
 
-	try {
-		scf.execute(bureaucrat1);
-	} catch (std::exception &e) {
-		std::cout << GREEN << e.what() << RESET << std::endl;
-	}
+	scf.execute(bureaucrat1);
 	scf.beSigned(bureaucrat2);
 	scf.execute(bureaucrat2);
 	std::cout << std::endl;
@@ -38,11 +34,7 @@ int main(void) {
 	std::cout << "GradeToSign: " << rrf.getGradeSign() << std::endl;
 	std::cout << std::endl;
 
-	try {
-		rrf.execute(bureaucrat1);
-	} catch (std::exception &e) {
-		std::cout << GREEN << e.what() << RESET << std::endl;
-	}
+	rrf.execute(bureaucrat1);
 	rrf.beSigned(bureaucrat2);
 	rrf.execute(bureaucrat2);
 	std::cout << std::endl;
@@ -55,11 +47,7 @@ int main(void) {
 	std::cout << "GradeToSign: " << ppf.getGradeSign() << std::endl;
 	std::cout << std::endl;
 
-	try {
-		ppf.execute(bureaucrat3);
-	} catch (std::exception &e) {
-		std::cout << GREEN << e.what() << RESET << std::endl;
-	}
+	ppf.execute(bureaucrat3);
 	ppf.beSigned(bureaucrat3);
 	ppf.execute(bureaucrat3);
 }

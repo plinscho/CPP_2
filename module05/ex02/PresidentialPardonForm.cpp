@@ -3,15 +3,7 @@
 #include <iostream>
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string &target)
-: _target(target), AForm("PresidentialPardonForm", 25, 5){
-
-}
-
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy) {
-
-}
-
-PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &rhs){
+: AForm("PresidentialPardonForm", 25, 5), _target(target) {
 
 }
 
@@ -24,10 +16,12 @@ bool	PresidentialPardonForm::execute(const Bureaucrat &executor) const {
 		}
 		else if (executor.getGrade() <= this->getGradeExe()) {
 			std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+			return true;
 		} else {
 			throw GradeTooLowException("Grade is too low to execute PresidentialPardon.");
 		}
 	} catch (const std::exception &e) {
 		std::cout << e.what() << std::endl;
+		return false;
 	}
 }

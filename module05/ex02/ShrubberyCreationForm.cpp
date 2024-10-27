@@ -4,15 +4,7 @@
 #include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) 
-:_target(target), _fileName(target + "_shrubbery"), AForm(target, 145, 137){
-
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy) {
-
-}
-
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs){
+: AForm(target, 145, 137), _target(target), _fileName(target + "_shrubbery") {
 
 }
 
@@ -24,7 +16,7 @@ bool	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
 			throw FormIsNotSigned("Form is not signed!");
 		}
 		else if (executor.getGrade() <= this->getGradeExe()) {
-			std::ofstream file(_fileName);
+			std::ofstream file(_fileName.c_str());
 			if (file.is_open()){
 				const std::string tree = "   oxoxooo x ooxoo\n"
 										"  ooxoxo oo  oxoxooo\n"
@@ -41,14 +33,16 @@ bool	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
 										"  _______/____\\____";
 			file << tree;
 			file.close();
+			return true;
 			} else {
 				std::cerr << "Error. File could not be opened!" << std::endl;
-				return ;
+				return false;
 			}
 		} else {
 			throw GradeTooLowException("Grade is too low to execute Shrubbery.");
 		}
 	} catch (const std::exception &e) {
 		std::cout << e.what() << std::endl;
+		return false;
 	}
 }
