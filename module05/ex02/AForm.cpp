@@ -77,6 +77,7 @@ bool	AForm::onIsSigned() const {
 void	AForm::beSigned(Bureaucrat &bureaucrat) {
 	if (bureaucrat.getGrade() <= this->_gradeSign) {
 		this->_signed = true;
+		std::cout << bureaucrat.getName() << " signed form " << getName() << std::endl;
 	} else {
 		throw GradeTooLowException("Grade too low to sign Aform.");
 	}

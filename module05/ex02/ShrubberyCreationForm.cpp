@@ -33,9 +33,12 @@ bool	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
 										"  _______/____\\____";
 			file << tree;
 			file.close();
+			std::cout << executor.getName() << " executed " << getName() << std::endl;
 			return true;
 			} else {
 				std::cerr << "Error. File could not be opened!" << std::endl;
+				std::cerr << executor.getName() << " could not execute " 
+				<< getName() << std::endl;
 				return false;
 			}
 		} else {
@@ -43,6 +46,8 @@ bool	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
 		}
 	} catch (const std::exception &e) {
 		std::cout << e.what() << std::endl;
+		std::cerr << executor.getName() << " could not execute " 
+		<< getName() << std::endl;
 		return false;
 	}
 }

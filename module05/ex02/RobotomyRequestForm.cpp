@@ -6,7 +6,7 @@
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) :
 AForm("RobotomyRequestForm", 72, 45), _target(target) {
-	
+
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(){}
@@ -27,12 +27,15 @@ bool	RobotomyRequestForm::execute(const Bureaucrat &executor) const {
 			} else {
 				std::cout << _target << " robotomozation was a FAILURE" << std::endl;
 			}
+			std::cout << executor.getName() << " executed " << getName() << std::endl;
 			return true;
 		} else {
 			throw GradeTooLowException("Grade is too low to execute Romotomy.");
 		}
 	} catch (const std::exception &e) {
 		std::cout << e.what() << std::endl;
+		std::cerr << executor.getName() << " could not execute " 
+		<< getName() << std::endl;
 		return false;
 	}
 }

@@ -19,3 +19,14 @@ class ShrubberyCreationForm : public AForm {
 
 	bool	execute(const Bureaucrat &executor) const ;
 };
+
+/*
+	std::cout << executor.getName() << " executed " << getName() << std::endl;
+
+ {
+		std::cout << _name << " executed " << form.getName() << std::endl;
+	} else {
+		std::cerr << _name << " could not execute " << form.getName() << std::endl;
+	}
+
+*/

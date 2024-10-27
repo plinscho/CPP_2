@@ -15,6 +15,7 @@ bool	PresidentialPardonForm::execute(const Bureaucrat &executor) const {
 			throw FormIsNotSigned("Form is not signed!");
 		}
 		else if (executor.getGrade() <= this->getGradeExe()) {
+			std::cout << executor.getName() << " executed " << getName() << std::endl;
 			std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 			return true;
 		} else {
@@ -22,6 +23,8 @@ bool	PresidentialPardonForm::execute(const Bureaucrat &executor) const {
 		}
 	} catch (const std::exception &e) {
 		std::cout << e.what() << std::endl;
+		std::cerr << executor.getName() << " could not execute " 
+		<< getName() << std::endl;
 		return false;
 	}
 }
