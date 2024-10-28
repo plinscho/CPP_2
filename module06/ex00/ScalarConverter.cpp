@@ -1,37 +1,24 @@
 #include "ScalarConverter.hpp"
 #include "Parser.hpp"
+#include "Converter.hpp"
 #include <iostream>
 
 void ScalarConverter::convert(const std::string &fmt) {
-	fmtType	type;
-	Parser parser;
-	Values	values;
+
+	fmtType		type;
+	Parser 		parser;
+	Values		values;
 	
 	parser.initVal();
 	type = parser.getType(fmt);
-	switch (type)
-	{
-		case SPECIAL:
-			printSpecials(fmt);
-			break;
-		case CHAR:
+	Converter	convert(parser.getValues(), type);
 
-			break;
-		case INT:
-
-			break;
-		case FLOAT:
-
-			break;
-		case DOUBLE:
-
-			break;
-		case NOT_VALID:
-
-			break;
-		default:
-			break;
-	}
+	values.valC = convert.toChar(fmt);
+	values.valD = convert.toDouble(fmt);
+	values.valF = convert.toFloat(fmt);
+	values.valI = convert.toInt(fmt);
+	
+	
 }
 
 void	printSpecials(const std::string &str) {

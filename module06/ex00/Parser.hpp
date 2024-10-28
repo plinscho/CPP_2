@@ -16,5 +16,6 @@ class Parser {
 	Values	getValues() const ;
 
 	private:
+	bool	_err = false;
 	Values	_val;
 };

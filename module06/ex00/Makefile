@@ -1,6 +1,6 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -std=c++98
-SRCS = main.cpp ScalarConverter.cpp Parser.cpp
+SRCS = main.cpp ScalarConverter.cpp Parser.cpp Converter.cpp
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
 TARGET = scalar
