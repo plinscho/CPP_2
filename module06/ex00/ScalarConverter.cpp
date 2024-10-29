@@ -11,14 +11,17 @@ void ScalarConverter::convert(const std::string &fmt) {
 	
 	parser.initVal();
 	type = parser.getType(fmt);
-	Converter	convert(parser.getValues(), type);
 
-	values.valC = convert.toChar(fmt);
-	values.valD = convert.toDouble(fmt);
-	values.valF = convert.toFloat(fmt);
-	values.valI = convert.toInt(fmt);
-	
-	
+	Converter	converter(parser.getValues(), type);
+	if (type == NOT_VALID) {
+		values.valC = IMPOSSIBLE;
+		values.valD = IMPOSSIBLE;
+		values.valF = IMPOSSIBLE;
+		values.valI = IMPOSSIBLE;
+	} else {
+		converter.convert();
+	}
+	converter.printValues();	
 }
 
 void	printSpecials(const std::string &str) {

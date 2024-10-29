@@ -5,13 +5,16 @@
 class Converter {
 	public:
 		Converter(const Values &, fmtType &);
-		
-		char	toChar(const std::string &);
-		int		toInt(const std::string &);
-		float	toFloat(const std::string &);
-		double	toDouble(const std::string &);
+		void	convert();
+		void	fromChar();
+		void	fromInt();
+		void	fromFloat();
+		void	fromDouble();
+
+		bool	floatIsOk() const ;
+		bool	doubleIsOk() const ;
+		void	printValues() const ;
 	private:
-		bool	_err;
-		fmtType	_type;
 		Values	_val;
+		fmtType	_type;
 };

@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 
+#define IMPOSSIBLE 0x00000001
+
 enum fmtType {
 	SPECIAL = 0, 
 	CHAR, 
