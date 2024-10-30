@@ -24,6 +24,48 @@ bool	Parser::onChar(const std::string &fmt) {
 	return (false);
 }
 
+//	This function parses fmt trying to find a double, a float or a integer.
+//	If no one is found, NOT_VALID is returned.
+fmtType	Parser::numberParse(const std::string &fmt) {
+		fmtType retType = NOT_VALID;
+	std::stringstream ss(fmt);
+	_val.raw = fmt;
+
+	// Try to parse as int
+	int intValue;
+	ss >> intValue;
+	if (!ss.fail() && ss.eof()) {
+		_val.valI = intValue;
+		return INT;
+	}
+
+	// Clear the stringstream state and reset it with the input string
+	ss.clear();
+	ss.str(fmt);
+
+	// Try to parse as float
+	float floatValue;
+	ss >> floatValue;
+	if (!ss.fail() && ss.eof()) {
+		_val.valF = floatValue;
+		return FLOAT;
+	}
+
+	// Clear the stringstream state and reset it with the input string
+	ss.clear();
+	ss.str(fmt);
+
+	// Try to parse as double
+	double doubleValue;
+	ss >> doubleValue;
+	if (!ss.fail() && ss.eof()) {
+		_val.valD = doubleValue;
+		return DOUBLE;
+	}
+
+	return retType;
+}
+
 
 // Returns a enum type and saves fmt in the parser.
 fmtType	Parser::getType(const std::string &fmt) {
@@ -32,58 +74,7 @@ fmtType	Parser::getType(const std::string &fmt) {
 	} else if (onChar(fmt)){
 		return CHAR;
 	}
-
-	fmtType retType;
-	std::stringstream ss;
-	int fmtLen = fmt.length();
-	int i = 0;
-
-	if (fmt[0] == '+' || fmt[0] == '-')
-		ss << fmt[i++];
-
-	retType = INT;
-	for ( ; i < fmtLen; i++)
-	{
-		if (fmt[i] == '.' && retType != DOUBLE)
-		{
-			retType = DOUBLE;
-			ss << fmt[i];
-		}
-		else if (fmt[i] == 'e' && i < fmtLen - 1
-			&& (fmt[i + 1] == '-'
-				|| fmt[i + 1] == '+'
-				|| std::isdigit(fmt[i + 1])))
-		{
-			ss << fmt[i] << fmt[i + 1];
-			i++;
-			retType = DOUBLE;
-		}
-		else if (fmt[i] == 'f' && i == fmtLen - 1 && retType == DOUBLE)
-			retType = FLOAT;
-		else if (!std::isdigit(fmt[i]))
-		{
-			retType = NOT_VALID;
-			i = fmtLen;
-		}
-		else
-			ss << fmt[i];
-	}
-	if (retType == INT)
-	{
-		long lvalue;
-		ss >> lvalue;
-		if (ss.fail() || lvalue > INT_MAX || lvalue < INT_MIN) {
-			retType = NOT_VALID;
-		} else {
-			ss >> _val.valI;
-		}
-	} else if (retType == FLOAT) {
-		ss >> _val.valF;
-	} else if (retType == DOUBLE) {
-		ss >> _val.valD;
-	}
-	_val.raw = fmt;
-	return (retType);
+	return (numberParse(fmt));
 }
 
 // returns the parser saved values.

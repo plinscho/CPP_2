@@ -13,7 +13,8 @@ class Converter {
 
 		bool	floatIsOk() const ;
 		bool	doubleIsOk() const ;
-		void	printValues() const ;
+		void	printNotValid() const ;
+		void	printSpecials(const std::string&);
 	private:
 		Values	_val;
 		fmtType	_type;

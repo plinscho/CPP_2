@@ -11,6 +11,7 @@ class Parser {
 
 	void	initVal();
 	Values	getValues() const ;
+	fmtType	numberParse(const std::string &);
 
 	private:
 	Values	_val;
