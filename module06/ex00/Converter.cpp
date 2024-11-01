@@ -44,6 +44,7 @@ bool	Converter::doubleIsOk() const {
 }
 
 void	Converter::fromChar() {
+	std::cout << "FROM CHAR" << std::endl;
 	if (_val.valC < 33 || _val.valC > 126){
 		std::cout << "Char: Non displayable" << std::endl;
 	} else {
@@ -59,10 +60,11 @@ void	Converter::fromChar() {
 }
 
 void		Converter::fromInt() {
+	std::cout << "FROM INT" << std::endl;
 	if (_val.valI > INT_MAX || _val.valI < INT_MIN ){
 		std::cout << "Conversion Impossible, INT limit surpassed" << std::endl;
 	} else {
-		std::cout << "Char: '" << static_cast<char>(_val.valI) << "'" << std::endl;
+		std::cout << "Char: '" << (char)(_val.valI) << "'" << std::endl;
 		std::cout << "Int : " << _val.valI << std::endl;
 		std::cout << "Double: " << std::fixed << std::setprecision(2)
 				  << static_cast<double>(_val.valI) << std::endl;
@@ -72,7 +74,7 @@ void		Converter::fromInt() {
 }
 
 void	Converter::fromFloat() {
-
+	std::cout << "FROM FLOAT" << std::endl;
 	std::cout << std::fixed;
 	// char
 	if (_val.valF < 127 && _val.valF > 0) {
@@ -114,7 +116,7 @@ void	Converter::fromFloat() {
 }
 
 void	Converter::fromDouble() {
-
+	std::cout << "FROM DOUBLE" << std::endl;
 	std::cout << std::fixed;
 	// char
 	if (_val.valD < 127 && _val.valD > 0) {
