@@ -1,6 +1,6 @@
 #include "Parser.hpp"
 #include <cstdlib>
-#include <climits>
+#include <limits>
 #include <sstream>
 
 //	Check the subject special cases.
@@ -27,42 +27,54 @@ bool	Parser::onChar(const std::string &fmt) {
 //	This function parses fmt trying to find a double, a float or a integer.
 //	If no one is found, NOT_VALID is returned.
 fmtType	Parser::numberParse(const std::string &fmt) {
-		fmtType retType = NOT_VALID;
-	std::stringstream ss(fmt);
+
+	std::stringstream ss;
+	size_t	fmtLen = fmt.length();
+	size_t i = 0;
 	_val.raw = fmt;
 
-	// Try to parse as int
-	int intValue;
-	ss >> intValue;
-	if (!ss.fail() && ss.eof()) {
-		_val.valI = intValue;
-		return INT;
+	if (fmt[0] == '+' || fmt[0] == '-') {
+		ss << fmt[i++];
+	}
+	fmtType retType = INT; // Start assuming we have an
+	for ( ; i < fmtLen ; i++) {
+		// check for '.' 
+		if (fmt[i] == '.') {
+			retType = DOUBLE;
+		} 
+		// check for 'f' 
+		else if (fmt[i] == 'f' && i == fmtLen - 1 && retType == DOUBLE){
+			retType = FLOAT;
+		}
+		else if (!std::isdigit(fmt[i])) { // if not '.', 'f', or digit, then its not valid.
+			retType = NOT_VALID;
+			i = fmtLen;
+		} else {
+			ss << fmt[i];
+		}
 	}
 
-	// Clear the stringstream state and reset it with the input string
-	ss.clear();
-	ss.str(fmt);
-
-	// Try to parse as float
-	float floatValue;
-	ss >> floatValue;
-	if (!ss.fail() && ss.eof()) {
-		_val.valF = floatValue;
-		return FLOAT;
+	switch (retType)
+	{
+	case FLOAT:
+		ss >> _val.valF;
+		break;
+	
+	case DOUBLE:
+		ss >> _val.valD;
+		break;
+	case INT:
+		long lValue = 0;
+		ss >> lValue;
+		if (ss.fail()
+			|| lValue > std::numeric_limits<int>::max()
+			|| lValue < std::numeric_limits<int>::min()) {
+				retType = NOT_VALID;
+			}
+		break;
+	case NOT_VALID:
+		break;
 	}
-
-	// Clear the stringstream state and reset it with the input string
-	ss.clear();
-	ss.str(fmt);
-
-	// Try to parse as double
-	double doubleValue;
-	ss >> doubleValue;
-	if (!ss.fail() && ss.eof()) {
-		_val.valD = doubleValue;
-		return DOUBLE;
-	}
-
 	return retType;
 }
 
