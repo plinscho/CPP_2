@@ -4,7 +4,7 @@
 #include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) 
-: AForm(target, 145, 137), _target(target), _fileName(target + "_shrubbery") {
+: AForm("ShrubberyCreationForm", 145, 137), _target(target), _fileName(target + "_shrubbery") {
 
 }
 
