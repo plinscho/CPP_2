@@ -31,7 +31,7 @@ fmtType	Parser::numberParse(const std::string &fmt) {
 	std::stringstream ss;
 	size_t	fmtLen = fmt.length();
 	size_t i = 0;
-	_val.raw = fmt;
+	_val.raw = fmt; // save input in struct
 
 	if (fmt[0] == '+' || fmt[0] == '-') {
 		ss << fmt[i++];
@@ -54,25 +54,26 @@ fmtType	Parser::numberParse(const std::string &fmt) {
 		}
 	}
 
+	long lValue = 0;
 	switch (retType)
 	{
 	case FLOAT:
 		ss >> _val.valF;
 		break;
-	
 	case DOUBLE:
 		ss >> _val.valD;
 		break;
 	case INT:
-		long lValue = 0;
 		ss >> lValue;
 		if (ss.fail()
 			|| lValue > std::numeric_limits<int>::max()
 			|| lValue < std::numeric_limits<int>::min()) {
 				retType = NOT_VALID;
-			}
+		} else {
+			ss >> _val.valI;
+		}
 		break;
-	case NOT_VALID:
+	default:
 		break;
 	}
 	return retType;
