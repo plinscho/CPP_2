@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <iostream>
 
+#define TAB
+
 Converter::Converter(const Values &val, fmtType &type) : _val(val), _type(type){
 
 }
@@ -43,116 +45,73 @@ bool	Converter::doubleIsOk() const {
 	return (!(std::isnan(_val.valD) || std::isinf(_val.valD)));
 }
 
+void Converter::printValues() const {
+    std::cout << "Char:\t\t";
+    if (_val.valI >= 0 && _val.valI <= 127 && std::isprint(_val.valC)) {
+        std::cout << "'" << _val.valC << "'" << std::endl;
+    } else {
+        std::cout << "Non displayable" << std::endl;
+    }
+
+    std::cout << "Int:\t\t" << _val.valI << std::endl;
+
+    if (floatIsOk()) {
+        std::cout << "Float:\t\t" << std::fixed << std::setprecision(1) << _val.valF << "f" << std::endl;
+    } else {
+        std::cout << "Float:\t\timpossible" << std::endl;
+    }
+
+    if (doubleIsOk()) {
+        std::cout << "Double:\t\t" << std::fixed << std::setprecision(1) << _val.valD << std::endl;
+    } else {
+        std::cout << "Double:\t\timpossible" << std::endl;
+    }
+}
+
+// Works OK
 void	Converter::fromChar() {
 	std::cout << "FROM CHAR" << std::endl;
-	if (_val.valC < 33 || _val.valC > 126){
-		std::cout << "Char: Non displayable" << std::endl;
-	} else {
-		std::cout << "Char: " << _val.valC << std::endl;
-	}
+
 	_val.valD = static_cast<double>(_val.valC);
 	_val.valF = static_cast<float>(_val.valC);
 	_val.valI = static_cast<int>(_val.valC);
-	
-	std::cout << "Int: " << _val.valI << std::endl;
-	std::cout << "Double: " << _val.valD << ".0" << std::endl;
-	std::cout << "Float: " << _val.valF << ".0f" << std::endl;
+	printValues();
 }
 
 void		Converter::fromInt() {
-	std::cout << "FROM INT" << std::endl;
+	std::cout << "FROM INT: " << _val.valI << std::endl;
 	if (_val.valI > INT_MAX || _val.valI < INT_MIN ){
-		std::cout << "Conversion Impossible, INT limit surpassed" << std::endl;
+		std::cout << "Conversion Impossible, INT limit surpassed!" << std::endl;
+		return ;
 	} else {
-		std::cout << "Char: '" << (char)(_val.valI) << "'" << std::endl;
-		std::cout << "Int : " << _val.valI << std::endl;
-		std::cout << "Double: " << std::fixed << std::setprecision(2)
-				  << static_cast<double>(_val.valI) << std::endl;
-		std::cout << "Float: " << static_cast<float>(_val.valI) <<  std::fixed 
-					<< std::setprecision(2) << "f" << std::endl;
+        _val.valC = static_cast<char>(_val.valI);
+        _val.valD = static_cast<double>(_val.valI);
+        _val.valF = static_cast<float>(_val.valI);
+		printValues();
 	}
 }
 
 void	Converter::fromFloat() {
 	std::cout << "FROM FLOAT" << std::endl;
-	std::cout << std::fixed;
-	// char
-	if (_val.valF < 127 && _val.valF > 0) {
-		_val.valC = static_cast<char>(_val.valF);
-		if (std::isprint(_val.valC)) {
-			std::cout << "Char: '" << _val.valC << "'" << std::endl;
-		} else {
-			std::cout << "Char : Non printable" << std::endl;
-		}
-	} else {
-		std::cout << "Char: Out of range" << std::endl;
-	}
 
-	// int
+	_val.valC = static_cast<char>(_val.valF);
 	_val.valI = static_cast<int>(_val.valF);
-	if (_val.valI > INT_MAX || _val.valI > INT_MIN) {
-		std::cout << "Int: Overflow (out of range)" << std::endl;
-	} else {
-		std::cout << "Int: " << _val.valI << std::endl;
-	}
-
-	// float
-   	if (_val.valF > std::numeric_limits<float>::max() ||
-		_val.valF < -std::numeric_limits<float>::max()) {
-			std::cout << "Float: Overflow" << std::endl;
-	} else {
-		std::cout << "Float: " << _val.valF << "f" << std::endl;
-	}
-
-	// double
-	if (_val.valF > std::numeric_limits<double>::max() ||
-		_val.valF < -std::numeric_limits<double>::max()) {
-			std::cout << "Double: Overflow" << std::endl;
-	} else {
-		_val.valD = static_cast<double>(_val.valF);
-		std::cout << "Double: " << _val.valD << std::endl;
-	}
-
+	_val.valD = static_cast<double>(_val.valF);
+	printValues();
 }
 
 void	Converter::fromDouble() {
 	std::cout << "FROM DOUBLE" << std::endl;
-	std::cout << std::fixed;
-	// char
-	if (_val.valD < 127 && _val.valD > 0) {
-		_val.valC = static_cast<char>(_val.valD);
-		if (std::isprint(_val.valC)) {
-			std::cout << "Char: '" << _val.valC << "'" << std::endl;
-		} else {
-			std::cout << "Char : Non printable" << std::endl;
-		}
-	} else {
-		std::cout << "Char: Out of range" << std::endl;
-	}
 
-	// Int
+	_val.valC = static_cast<char>(_val.valD);
 	_val.valI = static_cast<int>(_val.valD);
-	if (_val.valI > INT_MAX || _val.valI > INT_MIN) {
-		std::cout << "Int: Overflow (out of range)" << std::endl;
-	} else {
-		std::cout << "Int: " << _val.valI << std::endl;
-	}
-
-	// Float
 	_val.valF = static_cast<float>(_val.valD);
-	std::cout << "Float: " << _val.valF << "f" << std::endl;
-
-	// Double
-	std::cout << "Double :" << _val.valD << std::endl;
+	printValues();
 }
 
 // remake function
 void	Converter::printNotValid() const {
-	std::cout << "INPUT:\t\t" << _val.raw << std::endl;
-	std::cout << "Char:\t\t" << _val.valC << std::endl;
-	std::cout << "Int:\t\t" << _val.valI << std::endl;
-	std::cout << "Float:\t\t" << _val.valF << "f" << std::endl;
-	std::cout << "Doble:\t\t" << _val.valD << std::endl;
+	std::cout << "INPUT NOT VALID!:\t\t" << _val.raw << std::endl;
 }
 
 void	Converter::printSpecials(const std::string &str) {

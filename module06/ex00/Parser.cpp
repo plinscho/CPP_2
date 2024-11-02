@@ -28,7 +28,7 @@ bool	Parser::onChar(const std::string &fmt) {
 //	If no one is found, NOT_VALID is returned.
 fmtType	Parser::numberParse(const std::string &fmt) {
 
-	std::stringstream ss;
+	std::stringstream ss(fmt);
 	size_t	fmtLen = fmt.length();
 	size_t i = 0;
 	_val.raw = fmt; // save input in struct
@@ -36,21 +36,18 @@ fmtType	Parser::numberParse(const std::string &fmt) {
 	if (fmt[0] == '+' || fmt[0] == '-') {
 		ss << fmt[i++];
 	}
+
 	fmtType retType = INT; // Start assuming we have an
 	for ( ; i < fmtLen ; i++) {
 		// check for '.' 
 		if (fmt[i] == '.') {
 			retType = DOUBLE;
-		} 
-		// check for 'f' 
-		else if (fmt[i] == 'f' && i == fmtLen - 1 && retType == DOUBLE){
+		} else if (fmt[i] == 'f' && i == fmtLen - 1 && retType == DOUBLE){
 			retType = FLOAT;
-		}
-		else if (!std::isdigit(fmt[i])) { // if not '.', 'f', or digit, then its not valid.
+		} else if (!std::isdigit(fmt[i])) { // if not '.', 'f', or digit, then its not valid.
 			retType = NOT_VALID;
 			i = fmtLen;
-		} else {
-			ss << fmt[i];
+			break;
 		}
 	}
 
@@ -65,12 +62,13 @@ fmtType	Parser::numberParse(const std::string &fmt) {
 		break;
 	case INT:
 		ss >> lValue;
-		if (ss.fail()
-			|| lValue > std::numeric_limits<int>::max()
-			|| lValue < std::numeric_limits<int>::min()) {
-				retType = NOT_VALID;
+		if (ss.fail() || lValue > std::numeric_limits<int>::max() || 
+						lValue < std::numeric_limits<int>::min()) {
+			retType = NOT_VALID;
+			std::cerr << "Error. Int overflow!" << std::endl;
 		} else {
-			ss >> _val.valI;
+			_val.valI = static_cast<int>(lValue);
+			std::cout << "Int caught!" << std::endl;
 		}
 		break;
 	default:
