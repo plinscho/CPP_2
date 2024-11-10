@@ -10,9 +10,17 @@ class BitcoinExchange {
 	BitcoinExchange &operator=(const BitcoinExchange &rhs);
 	~BitcoinExchange();
 
-	bool	onLoadFile(const char *path);
+	bool	onLoadData(const char *path);
+	bool	onParseFile(const char* fileName) const ;
+	float	getRate(const std::string &) const ;
 
 	private:
 	std::map<std::string, float>	_prices;
 
 };
+
+bool		validateDate(std::string &date);
+float		strToFloat(std::string &valueFloat);
+
+void		printString(const char* string);
+std::string	trimString(const std::string &str);

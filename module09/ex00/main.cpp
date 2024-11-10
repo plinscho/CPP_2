@@ -11,6 +11,7 @@ bool	onOpenFile(const char* path) {
 		return (false);
 	}
 	inputFile.close();
+	printString("File found. Loading.");
 	return (true);
 }
 
@@ -19,7 +20,8 @@ void	closeFile() {
 }
 
 int main(int argc, char* argv[]) {
-	
+	BitcoinExchange bc;
+
 	if (argc > 2) {
 		std::cout << "Error, 2 arguments expected." << std::endl;
 		return (1);
@@ -27,7 +29,12 @@ int main(int argc, char* argv[]) {
 		std::cerr << "Error. File not found!" << std::endl;
 		return (1);
 	}
-	
 
+	if (!bc.onLoadData("data.csv")){
+		return (1);
+	}
+	
+	bc.onParseFile(argv[1]);
+	
 	return (0);
 }
