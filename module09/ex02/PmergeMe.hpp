@@ -1,5 +1,8 @@
 #pragma once
+#include <cstdlib>
+#include <climits>
 #include <iostream>
+#include <vector>
 
 class PmergeMe {
 	public:
@@ -9,5 +12,5 @@ class PmergeMe {
 	~PmergeMe();
 	
 	private:
-
+	std::vector<int>	_Vints;
 };
