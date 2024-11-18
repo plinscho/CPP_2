@@ -15,10 +15,8 @@ class Bureaucrat {
 	void				decrementGrade();
 
 	private:
-	std::string			_name;
+	const std::string	_name;
 	int					_grade;
-
-
 
 	class GradeTooHighException : public std::range_error {
 		public:

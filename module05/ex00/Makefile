@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -Wextra -std=c++98
 SRCS = main.cpp Bureaucrat.cpp
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
-TARGET = scalar
+TARGET = Bureaucrat
 
 all: $(TARGET)
 
