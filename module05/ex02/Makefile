@@ -22,7 +22,7 @@ clean:
 	rm -f $(OBJS) $(DEPS)
 
 fclean: clean
-	rm -f $(TARGET)
+	rm -f $(TARGET) Home_shrubbery
 
 re: fclean all
 

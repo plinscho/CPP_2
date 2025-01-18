@@ -10,11 +10,13 @@ and writes ASCII trees inside it.
 
 class ShrubberyCreationForm : public AForm {
 	private:
-	const std::string	_target;
-	const std::string 	_fileName;
+	std::string	_target;
+	std::string 	_fileName;
 
 	public:
 	ShrubberyCreationForm(const std::string &target);
+	ShrubberyCreationForm(const ShrubberyCreationForm &copy);
+	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &rhs);
 	~ShrubberyCreationForm();
 
 	bool	execute(const Bureaucrat &executor) const ;

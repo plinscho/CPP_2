@@ -10,6 +10,19 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
 
 ShrubberyCreationForm::~ShrubberyCreationForm(){}
 
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy) 
+: AForm(copy), _target(copy._target), _fileName(copy._fileName) {
+
+}
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs) {
+	if (this != &rhs) {
+		AForm::operator=(rhs);
+		_target = rhs._target;
+		_fileName = rhs._fileName;
+	}
+}
+
 bool	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
 	try {
 		if (!onIsSigned()) {

@@ -18,7 +18,7 @@ AForm::AForm(const std::string &name, int gradeSign, int gradeExe)
         } else if (gradeSign < 1 || gradeExe < 1) {
 			throw GradeTooHighException("Grade too high.");
         } else if (gradeExe > 150 || gradeSign > 150) {
-          	throw GradeTooLowException("Grade too low.");
+            throw GradeTooLowException("Grade too low.");
         }
     }
     catch(GradeTooHighException &e)

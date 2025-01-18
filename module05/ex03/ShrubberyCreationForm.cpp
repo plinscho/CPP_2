@@ -3,9 +3,26 @@
 #include <iostream>
 #include <fstream>
 
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137) {
+	
+}
+
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) 
 : AForm("ShrubberyCreationForm", 145, 137), _target(target), _fileName(target + "_shrubbery") {
 
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy) 
+: AForm(copy), _target(copy._target), _fileName(copy._fileName) {
+
+}
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs) {
+	if (this != &rhs) {
+		AForm::operator=(rhs);
+		_target = rhs._target;
+		_fileName = rhs._fileName;
+	}
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(){}

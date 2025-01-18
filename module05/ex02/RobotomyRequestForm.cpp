@@ -9,6 +9,18 @@ AForm("RobotomyRequestForm", 72, 45), _target(target) {
 
 }
 
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy)
+: AForm(copy), _target(copy._target) {
+
+}
+
+RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &rhs) {
+	if (this != &rhs){
+		AForm::operator=(rhs);
+		_target = rhs._target;
+	}
+}
+
 RobotomyRequestForm::~RobotomyRequestForm(){}
 
 bool	RobotomyRequestForm::execute(const Bureaucrat &executor) const {
