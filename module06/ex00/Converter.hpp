@@ -5,6 +5,7 @@
 class Converter {
 	public:
 		Converter(const Values &, fmtType &);
+		~Converter();
 		void	convert();
 		void	fromChar();
 		void	fromInt();
@@ -20,4 +21,8 @@ class Converter {
 	private:
 		Values	_val;
 		fmtType	_type;
+
+		Converter();
+		Converter(const Converter &copy);
+		Converter &operator=(const Converter &rhs);
 };

@@ -68,7 +68,6 @@ fmtType	Parser::numberParse(const std::string &fmt) {
 			std::cerr << "Error. Int overflow!" << std::endl;
 		} else {
 			_val.valI = static_cast<int>(lValue);
-			std::cout << "Int caught!" << std::endl;
 		}
 		break;
 	default:

@@ -25,6 +25,10 @@ class ScalarConverter {
 	static void	convert(const std::string &);
 
 	private:
+    ScalarConverter(void);
+    ~ScalarConverter(void);
+    ScalarConverter(const ScalarConverter &);
+    ScalarConverter &operator=(const ScalarConverter &);
 };
 
 void	printSpecials(const std::string &);

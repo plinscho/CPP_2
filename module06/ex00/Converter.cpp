@@ -7,6 +7,19 @@
 
 #define TAB
 
+Converter::Converter(void){}
+
+Converter::Converter(const Converter &copy) {
+	(void)copy;
+}
+
+Converter &Converter::operator=(const Converter &rhs) {
+	(void)rhs;
+	return *this;
+}
+
+Converter::~Converter(){}
+
 Converter::Converter(const Values &val, fmtType &type) : _val(val), _type(type){
 
 }
