@@ -6,7 +6,7 @@ SRCS = main.cpp AForm.cpp Bureaucrat.cpp \
 			PresidentialPardonForm.cpp 
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
-TARGET = scalar
+TARGET = Bureaucrat
 
 all: $(TARGET)
 

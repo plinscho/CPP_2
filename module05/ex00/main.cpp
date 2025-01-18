@@ -9,12 +9,6 @@ int main() {
         std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 
-    try {
-        Bureaucrat b2("Bob", 0);
-        std::cout << b2 << std::endl;
-    } catch (const std::exception &e) {
-        std::cerr << "Exception caught: " << e.what() << std::endl;
-    }
 
     try {
         Bureaucrat b3("Charlie", 75);
@@ -27,5 +21,11 @@ int main() {
         std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 
+    try {
+        Bureaucrat b2("Bob", 0);
+        std::cout << b2 << std::endl;
+    } catch (const std::exception &e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
+    }
     return 0;
 }

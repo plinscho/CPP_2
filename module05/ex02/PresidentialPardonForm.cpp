@@ -2,8 +2,16 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5){
+
+}
+
 PresidentialPardonForm::PresidentialPardonForm(const std::string &target)
 : AForm("PresidentialPardonForm", 25, 5), _target(target) {
+
+}
+
+PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &rhs) {
 
 }
 
