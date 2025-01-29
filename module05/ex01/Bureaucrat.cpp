@@ -9,15 +9,11 @@ _name(name), _grade(grade) {
 	if (name.empty()) {
 		throw std::invalid_argument("Bureaucrat name is mandatory.");
 	}
-	try {
-		if (grade <= 0)
-			throw GradeTooHighException("Grade to high.");
-		else if (grade > 150)
-			throw GradeTooLowException("Grade too low.");
-	}
-	catch (const std::exception& e) {
-		std::cout << "exception caught: " << e.what() << std::endl;
-	}
+	if (grade <= 0)
+		throw GradeTooHighException("Grade to high.");
+	else if (grade > 150)
+		throw GradeTooLowException("Grade too low.");
+
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &copy)
@@ -41,25 +37,16 @@ Since grade 1 is the highest one and 150 the lowest,
 incrementing a grade 3 should give a grade 2 to the bureaucrat.
 */
 void Bureaucrat::incrementGrade() {
-	try {
-		--_grade;
-		if (_grade < 0)
-			throw GradeTooHighException("Grade too high.");
-	} catch (const std::exception& e){
-		std::cout << "exception caught: " << e.what() << std::endl;
-	}
+	--_grade;
+	if (_grade < 0) 
+		throw GradeTooHighException("Grade too high.");
 }
 
 void	Bureaucrat::decrementGrade()
 {
-	try {
-		++_grade;
-		if (_grade > 150) {
-			throw GradeTooLowException("Grade too low.");
-		}
-	}
-	catch (const std::exception &e) {
-		std::cout << "exeption caught:" << e.what() << std::endl;
+	++_grade;
+	if (_grade > 150) {
+		throw GradeTooLowException("Grade too low.");
 	}
 }
 

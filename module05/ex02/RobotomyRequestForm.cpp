@@ -19,6 +19,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 		AForm::operator=(rhs);
 		_target = rhs._target;
 	}
+	return *this;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(){}

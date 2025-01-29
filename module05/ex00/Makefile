@@ -1,4 +1,4 @@
-CXX = g++
+CXX = c++
 CXXFLAGS = -Wall -Wextra -std=c++98
 SRCS = main.cpp Bureaucrat.cpp
 OBJS = $(SRCS:.cpp=.o)

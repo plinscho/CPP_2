@@ -9,15 +9,10 @@ _name(name), _grade(grade) {
 	if (name.empty()) {
 		throw std::invalid_argument("Bureaucrat name is mandatory.");
 	}
-	try {
-		if (grade <= 0)
-			throw GradeTooHighException("Grade to high.");
-		else if (grade > 150)
-			throw GradeTooLowException("Grade too low.");
-	}
-	catch (const std::exception& e) {
-		std::cout << "exception caught: " << e.what() << std::endl;
-	}
+	if (grade < 1)
+		throw GradeTooHighException("Grade to high.");
+	else if (grade > 150)
+		throw GradeTooLowException("Grade too low.");
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &copy)

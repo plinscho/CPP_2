@@ -40,14 +40,22 @@ int main(void) {
 	std::cout << std::endl;
 
 	std::cout << RED << "*------------------Testing the PresidentialPardonForm------------------*" << RESET << std::endl;
-	Bureaucrat bureaucrat3("haha", 4);
-	PresidentialPardonForm ppf("homeAgain");
-	std::cout << "name: " << ppf.getName() << std::endl;
-	std::cout << "GradeToExec: " << ppf.getGradeExe() << std::endl;
-	std::cout << "GradeToSign: " << ppf.getGradeSign() << std::endl;
-	std::cout << std::endl;
+	try {
+		Bureaucrat bureaucrat3("haha", -40);
+		PresidentialPardonForm ppf("homeAgain");
+		std::cout << "name: " << ppf.getName() << std::endl;
+		std::cout << "GradeToExec: " << ppf.getGradeExe() << std::endl;
+		std::cout << "GradeToSign: " << ppf.getGradeSign() << std::endl;
+		std::cout << std::endl;
 
-	ppf.execute(bureaucrat3);
-	ppf.beSigned(bureaucrat3);
-	ppf.execute(bureaucrat3);
+		bureaucrat3.decrementGrade();
+		std::cout << bureaucrat3 << std::endl;
+		ppf.execute(bureaucrat3);
+		ppf.beSigned(bureaucrat3);
+		ppf.execute(bureaucrat3);
+		std::cout << bureaucrat3 << std::endl;
+	} catch (std::exception &e){
+		std::cout << e.what() << std::endl;
+		return 1;
+	}
 }

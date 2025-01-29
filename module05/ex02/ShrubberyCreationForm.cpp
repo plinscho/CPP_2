@@ -21,6 +21,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 		_target = rhs._target;
 		_fileName = rhs._fileName;
 	}
+	return *this;
 }
 
 bool	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
