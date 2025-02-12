@@ -5,7 +5,7 @@
 template <typename T> class Array {
 	public:
 	Array();
-	Array(unsigned int &n);
+	Array(unsigned int n);
 	~Array();
 	Array &operator=(const Array &);
 	T &operator[](size_t index);
