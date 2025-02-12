@@ -6,10 +6,13 @@
 template <typename T>
 void	easyfind(T haystack, int needle) {
 	typename T::iterator it;
-	it = std::find(haystack.begin(), haystack.end(), needle);
-	if (it == haystack.end()) {
-		throw std::range_error("Error, needle not found");
-	} else {
-		std::cout << "Found at position: " << *it << std::endl;
+	int i = 0;
+	for (it = haystack.begin() ; it != haystack.end() ; it++) {
+		if (*it == needle) {
+			std::cout << "Found needle: " << *it << "\nIn position: " << i << std::endl;
+			return ;
+		}
+		i++;
 	}
+	throw std::range_error("Error, needle not found");
 }
