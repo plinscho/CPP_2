@@ -2,6 +2,12 @@
 #include <iostream>
 #include <cstdlib>
 
+void    printArr(std::vector<int>arr) {
+    for (size_t i = 0; i < arr.size(); i++)
+    std::cout << "MANY [IDX] " << i << " : " << arr[i] << std::endl;
+}
+
+#define MAX_LEN 10000
 int main() {
     try {
         std::cout << "SUBJECT TEST" << std::endl;
@@ -18,16 +24,15 @@ int main() {
 
         std::cout << "MANY TEST" << std::endl;
 		srand((int) time(NULL));
-        Span lots = Span(100);
+        Span lots = Span(MAX_LEN);
         std::vector<int> many;
-        for (int i = 0; i < 100; ++i)
-            many.push_back(rand() % 1000);
+        for (int i = 0; i < MAX_LEN ; ++i)
+            many.push_back(rand() % 1500);
         lots.addMoreNumbers(many.begin(), many.end());
 
         std::cout << "Shortest Span: " << lots.shortestSpan() << std::endl;
         std::cout << "Longest Span: " << lots.longestSpan() << std::endl;
-        for (size_t i = 0; i < many.size(); i++)
-            std::cout << "MANY [IDX] " << i << " : " << many[i] << std::endl;
+
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }
