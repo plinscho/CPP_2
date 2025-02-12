@@ -15,10 +15,12 @@ int main() {
 	size_t arrLen = (sizeof(arr)/(sizeof(int)));
 
 	std::cout << "Print INT:" << std::endl;
-	::iter(arr, arrLen, printInt);
+	::iter(arr, arrLen, printElement<int>);
 
 	std::string arrStr[] = {"Hola", "Buenas", "Chao!"};
 	size_t arrStrLen = (sizeof(arrStr)/sizeof(arrStr[0]));
+
+	std::cout << "ARR len = " << arrStrLen << std::endl;
 	std::cout << "Print Element:" << std::endl;
 	::iter(arrStr, arrStrLen, printElement<std::string>);
 
