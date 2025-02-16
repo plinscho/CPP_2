@@ -7,7 +7,7 @@ void    printArr(std::vector<int>arr) {
     std::cout << "MANY [IDX] " << i << " : " << arr[i] << std::endl;
 }
 
-#define MAX_LEN 10000
+#define MAX_LEN 100000
 int main() {
     try {
         std::cout << "SUBJECT TEST" << std::endl;
@@ -27,7 +27,7 @@ int main() {
         Span lots = Span(MAX_LEN);
         std::vector<int> many;
         for (int i = 0; i < MAX_LEN ; ++i)
-            many.push_back(rand() % 1500);
+            many.push_back(rand() % 1000000);
         lots.addMoreNumbers(many.begin(), many.end());
 
         std::cout << "Shortest Span: " << lots.shortestSpan() << std::endl;

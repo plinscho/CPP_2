@@ -10,7 +10,7 @@ int main() {
     try {
         int vect[MAX_LEN];
         for (int i = 0 ; i < MAX_LEN ; i++) {
-            vect[i] = rand() % 100;
+            vect[i] = rand() % MAX_LEN;
             std::cout << " " << vect[i];
         }
         std::cout << std::endl;
@@ -18,7 +18,8 @@ int main() {
         std::vector<int> myvect(MAX_LEN);
         for (size_t i = 0; i < myvect.size(); ++i)
             myvect[i] = vect[i];
-        easyfind(myvect, 2);
+        int needle = easyfind(myvect, 10);
+        std::cout << "NEEDLE: " << needle << std::endl;
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }

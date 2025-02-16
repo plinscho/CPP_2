@@ -4,15 +4,11 @@
 #include <algorithm>
 
 template <typename T>
-void	easyfind(T haystack, int needle) {
-	typename T::iterator it;
-	int i = 0;
-	for (it = haystack.begin() ; it != haystack.end() ; it++) {
-		if (*it == needle) {
-			std::cout << "Found needle: " << *it << "\nIn position: " << i << std::endl;
-			return ;
-		}
-		i++;
+int	easyfind(T haystack, int needle) {
+	typename T::iterator id = find(haystack.begin(), haystack.end(), needle);
+	if (id != haystack.end()) {
+		return *id;
+	} else {
+		throw std::range_error("Error, needle not found");
 	}
-	throw std::range_error("Error, needle not found");
 }

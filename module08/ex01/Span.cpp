@@ -11,13 +11,11 @@ Span::Span(const Span &copy) {
 }
 
 Span &Span::operator=(const Span &rhs) {
-	_maxN = rhs._maxN;
-	_numbers.clear();
-	int size = rhs._numbers.size();
-	for (int i = 0 ; i < size ; i++) {
-		_numbers[i] = rhs._numbers[i];
-	}
-	return (*this);
+    if (this != &rhs) {
+        _maxN = rhs._maxN;
+        _numbers = rhs._numbers; // Use the vector's assignment operator
+    }
+    return (*this);
 }
 
 Span::~Span() {
@@ -25,7 +23,7 @@ Span::~Span() {
 }
 
 bool	Span::hasNumbers() const {
-	return (_numbers.size() > 0 ? true : false);
+	return (_numbers.size() > 1 ? true : false);
 }
 
 void	Span::addNumber(int n) {
